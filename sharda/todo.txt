@@ -1,0 +1,52 @@
+Q4.  TO sort the items in a list
+
+Q5.  To search the specific items in a tuple
+
+Q6.  To add two lists and find the 2nd last element using negative indexing
+
+Q7. To append a empty list and display the items using for loop
+
+my_list = [24, 40, 3, 9]
+
+my_list.sort()
+
+print(my_list)
+
+
+array1=[30,10,80,50]
+array2=[29,8,130,4]
+sumArray=array1+array2
+
+print(sumArray)
+
+print("Second last element:", sumArray[-2])
+
+givenList = [(9, 5),(43, 7),(39, 5),(19, 3),(9, 5)]
+  2)
+searchR = [item for item in givenList 
+          if item[0] == 5 or item[1] == 5]
+  
+print(searchR)
+
+Q8.WAP to create a dictionary with 5 elements and the field 
+of the dictionary is name, age of student.
+1)First Find the keys of the dictionary
+2)Find the values of the dictionary
+3)Find 3td item key-pair
+
+k=input("Please input a key: ") 
+v=input("Plesse input a value: ") 
+classe_list={k:v} 
+print(classe_list)
+mte:
+https://www.javatpoint.com/python-mcq-part-2
+https://www.javatpoint.com/python-mcq
+
+
+
+Write in python to create a tuple and perform the following operation
+(i)	Negative indexing 
+(ii)	Slicing
+(iii)	Unpacking a tuple 
+(iv)	Changing the element  of a tuple 
+Delete operation

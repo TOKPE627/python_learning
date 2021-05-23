@@ -1,0 +1,25 @@
+Q1.Hanoi Tour
+Q2. Water Juk problem solve the problem of 4 litres and 3 litres and to achieve the goal of 2 liters
+Q3. The second one is to achieved the gold of 3 litres  using 5 litres and 4 litres respectively
+
+https://www.youtube.com/watch?v=Cc4mqUNig-c
+
+https://www.youtube.com/watch?v=jFwREev_yvU
+Q4 n-Queens problem
+https://www.codesdope.com/blog/article/backtracking-explanation-and-n-queens-problem/
+
+Q5
+https://www.educative.io/edpresso/how-to-implement-a-breadth-first-search-in-python
+
+https://towardsdatascience.com/introduction-to-graph-algorithm-breadth-first-search-algorithm-in-python-8644b6d31880
+
+Q6
+Depth Limited Search
+https://www.youtube.com/watch?v=Bo19jEsXMbc
+   
+https://www.youtube.com/watch?v=TDS6sgUeP3E
+< > 
+
+BFS
+DFS
+UCS
