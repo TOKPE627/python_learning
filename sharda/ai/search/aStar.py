@@ -1,3 +1,10 @@
+# Python program to implement A* Algorithm
+#@Author TOKPE Kossi
+#@Date 25 June 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
 from collections import deque
  
 class Graph:

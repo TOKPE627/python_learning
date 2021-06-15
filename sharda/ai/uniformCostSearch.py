@@ -1,6 +1,12 @@
-# Python3 implemenatation of above approach
+#Python program to implemente Uniform Cost Search Algorithm
+#@Author TOKPE Kossi
+#@Date 17 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
  
-# returns the minimum cost in a vector( if
+# this function returns the minimum cost in a vector( if
 # there are multiple goal states)
 def  uniform_cost_search(goal, start):
      
@@ -121,4 +127,3 @@ if __name__ == '__main__':
     # print the answer
     print("Minimum cost from 0 to 6 is = ",answer[0])
  
-# This code is contributed by mohit kumar 29

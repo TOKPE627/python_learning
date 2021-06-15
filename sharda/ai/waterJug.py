@@ -1,3 +1,11 @@
+# Python program to implemente Water Jug Problem Algorithm
+#@Author TOKPE Kossi
+#@Date 15 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
+
 print("Water Jug Problem")
 x=int(input("Enter X:"))
 y=int(input("Enter Y:"))

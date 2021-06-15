@@ -1,85 +1,152 @@
-# genetic algorithm search of the one max optimization problem
-from numpy.random import randint
-from numpy.random import rand
- 
-# objective function
-def onemax(x):
-	return -sum(x)
- 
-# tournament selection
-def selection(pop, scores, k=3):
-	# first random selection
-	selection_ix = randint(len(pop))
-	for ix in randint(0, len(pop), k-1):
-		# check if better (e.g. perform a tournament)
-		if scores[ix] < scores[selection_ix]:
-			selection_ix = ix
-	return pop[selection_ix]
- 
-# crossover two parents to create two children
-def crossover(p1, p2, r_cross):
-	# children are copies of parents by default
-	c1, c2 = p1.copy(), p2.copy()
-	# check for recombination
-	if rand() < r_cross:
-		# select crossover point that is not on the end of the string
-		pt = randint(1, len(p1)-2)
-		# perform crossover
-		c1 = p1[:pt] + p2[pt:]
-		c2 = p2[:pt] + p1[pt:]
-	return [c1, c2]
- 
-# mutation operator
-def mutation(bitstring, r_mut):
-	for i in range(len(bitstring)):
-		# check for a mutation
-		if rand() < r_mut:
-			# flip the bit
-			bitstring[i] = 1 - bitstring[i]
- 
-# genetic algorithm
-def genetic_algorithm(objective, n_bits, n_iter, n_pop, r_cross, r_mut):
-	# initial population of random bitstring
-	pop = [randint(0, 2, n_bits).tolist() for _ in range(n_pop)]
-	# keep track of best solution
-	best, best_eval = 0, objective(pop[0])
-	# enumerate generations
-	for gen in range(n_iter):
-		# evaluate all candidates in the population
-		scores = [objective(c) for c in pop]
-		# check for new best solution
-		for i in range(n_pop):
-			if scores[i] < best_eval:
-				best, best_eval = pop[i], scores[i]
-				print(">%d, new best f(%s) = %.3f" % (gen,  pop[i], scores[i]))
-		# select parents
-		selected = [selection(pop, scores) for _ in range(n_pop)]
-		# create the next generation
-		children = list()
-		for i in range(0, n_pop, 2):
-			# get selected parents in pairs
-			p1, p2 = selected[i], selected[i+1]
-			# crossover and mutation
-			for c in crossover(p1, p2, r_cross):
-				# mutation
-				mutation(c, r_mut)
-				# store for next generation
-				children.append(c)
-		# replace population
-		pop = children
-	return [best, best_eval]
- 
-# define the total iterations
-n_iter = 100
-# bits
-n_bits = 20
-# define the population size
-n_pop = 100
-# crossover rate
-r_cross = 0.9
-# mutation rate
-r_mut = 1.0 / float(n_bits)
-# perform the genetic algorithm search
-best, score = genetic_algorithm(onemax, n_bits, n_iter, n_pop, r_cross, r_mut)
-print('Done!')
-print('f(%s) = %f' % (best, score))
+  
+# Python program to implement to create target string, starting from
+# random string using Genetic Algorithm
+#@Author TOKPE Kossi
+#@Date 30 June 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
+
+import random
+  
+# Number of individuals in each generation
+POPULATION_SIZE = 100
+  
+# Valid genes
+GENES = '''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP
+QRSTUVWXYZ 1234567890, .-;:_!"#%&/()=?@${[]}'''
+  
+# Target string to be generated
+TARGET = "Coding is a great passion"
+  
+class Individual(object):
+    '''
+    Class representing individual in population
+    '''
+    def __init__(self, chromosome):
+        self.chromosome = chromosome 
+        self.fitness = self.cal_fitness()
+  
+    @classmethod
+    def mutated_genes(self):
+        '''
+        create random genes for mutation
+        '''
+        global GENES
+        gene = random.choice(GENES)
+        return gene
+  
+    @classmethod
+    def create_gnome(self):
+        '''
+        create chromosome or string of genes
+        '''
+        global TARGET
+        gnome_len = len(TARGET)
+        return [self.mutated_genes() for _ in range(gnome_len)]
+  
+    def mate(self, par2):
+        '''
+        Perform mating and produce new offspring
+        '''
+  
+        # chromosome for offspring
+        child_chromosome = []
+        for gp1, gp2 in zip(self.chromosome, par2.chromosome):    
+  
+            # random probability  
+            prob = random.random()
+  
+            # if prob is less than 0.45, insert gene
+            # from parent 1 
+            if prob < 0.45:
+                child_chromosome.append(gp1)
+  
+            # if prob is between 0.45 and 0.90, insert
+            # gene from parent 2
+            elif prob < 0.90:
+                child_chromosome.append(gp2)
+  
+            # otherwise insert random gene(mutate), 
+            # for maintaining diversity
+            else:
+                child_chromosome.append(self.mutated_genes())
+  
+        # create new Individual(offspring) using 
+        # generated chromosome for offspring
+        return Individual(child_chromosome)
+  
+    def cal_fitness(self):
+        '''
+        Calculate fittness score, it is the number of
+        characters in string which differ from target
+        string.
+        '''
+        global TARGET
+        fitness = 0
+        for gs, gt in zip(self.chromosome, TARGET):
+            if gs != gt: fitness+= 1
+        return fitness
+  
+# Driver code
+def main():
+    global POPULATION_SIZE
+  
+    #current generation
+    generation = 1
+  
+    found = False
+    population = []
+  
+    # create initial population
+    for _ in range(POPULATION_SIZE):
+                gnome = Individual.create_gnome()
+                population.append(Individual(gnome))
+  
+    while not found:
+  
+        # sort the population in increasing order of fitness score
+        population = sorted(population, key = lambda x:x.fitness)
+  
+        # if the individual having lowest fitness score ie. 
+        # 0 then we know that we have reached to the target
+        # and break the loop
+        if population[0].fitness <= 0:
+            found = True
+            break
+  
+        # Otherwise generate new offsprings for new generation
+        new_generation = []
+  
+        # Perform Elitism, that mean 10% of fittest population
+        # goes to the next generation
+        s = int((10*POPULATION_SIZE)/100)
+        new_generation.extend(population[:s])
+  
+        # From 50% of fittest population, Individuals 
+        # will mate to produce offspring
+        s = int((90*POPULATION_SIZE)/100)
+        for _ in range(s):
+            parent1 = random.choice(population[:50])
+            parent2 = random.choice(population[:50])
+            child = parent1.mate(parent2)
+            new_generation.append(child)
+  
+        population = new_generation
+  
+        print("Generation: {}\tString: {}\tFitness: {}".\
+              format(generation,
+              "".join(population[0].chromosome),
+              population[0].fitness))
+  
+        generation += 1
+  
+      
+    print("Generation: {}\tString: {}\tFitness: {}".\
+          format(generation,
+          "".join(population[0].chromosome),
+          population[0].fitness))
+  
+if __name__ == '__main__':
+    main()

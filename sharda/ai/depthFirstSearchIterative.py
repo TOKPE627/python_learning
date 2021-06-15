@@ -1,4 +1,10 @@
-#Iterative Deepening Depth First Search
+# Python program to implemente Iterative Deepening Depth First Search Algorithm
+#@Author TOKPE Kossi
+#@Date 25 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
 graph={
     'A': ['B','C'],
     'B': ['D','E'],

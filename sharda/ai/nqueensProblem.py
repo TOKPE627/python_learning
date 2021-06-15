@@ -1,3 +1,10 @@
+# Python program to implemente N Queens Problem Algorithm
+#@Author TOKPE Kossi
+#@Date 20 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
 #Number of queens
 print ("Enter the number of queens")
 N = int(input())

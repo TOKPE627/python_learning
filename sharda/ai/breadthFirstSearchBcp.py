@@ -1,3 +1,10 @@
+# Python program to implemente Breadth First Search Algorithm
+#@Author TOKPE Kossi
+#@Date 27 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
+
 from queue import Queue
 
 

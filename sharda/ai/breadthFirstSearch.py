@@ -1,27 +1,45 @@
-graph = {
-  'A' : ['B','C'],
-  'B' : ['D', 'E'],
-  'C' : ['F'],
-  'D' : [],
-  'E' : ['F'],
-  'F' : []
-}
+# Python program to implemente Breadth First Search Algorithm
+#@Author TOKPE Kossi
+#@Date 27 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
 
-visited = [] # List to keep track of visited nodes.
-queue = []     #Initialize a queue
+def createGraph(graph):
+    n = int(input("Enter the number of nodes in graph:-"))
+    for _ in range(n):
+        node = input("Enter nodes and connected nodes in following format \nnode:connectedNode1, connectedNode2,...").split(":")
+        graph[node[0]] = node[1].split(",")
+    return graph
 
-def bfs(visited, graph, node):
-  visited.append(node)
-  queue.append(node)
+def bfs(graph, start, dest):
+    result    = ["Not reachable", list()]
+    visited   = list()
+    queue     = list()
+    queue.append(start)
+    visited.append(start)
+    while queue:
+        currentNode = queue.pop(0)
+        if(currentNode not in graph.keys()):
+            continue
 
-  while queue:
-    s = queue.pop(0) 
-    print (s, end = " ") 
+        for node in graph[currentNode]:
+            if(node not in graph.keys()):
+                continue
 
-    for neighbour in graph[s]:
-      if neighbour not in visited:
-        visited.append(neighbour)
-        queue.append(neighbour)
+            if(node==dest):
+                result[0]="Reachable"
+                break
+            if(node not in visited):
+                visited.append(node)
+                queue.append(node)
+    result[1] = visited
+    return result
 
-# Driver Code
-bfs(visited, graph, 'A')
+graph = dict()
+graph = createGraph(graph)
+start = input("Enter the starting point of traversal:-")
+end   = input("Enter the ending point of traversal:-")
+result = bfs(graph, start, end)
+print("Result:-", result[0])
+print("Path traversed:-", result[1])

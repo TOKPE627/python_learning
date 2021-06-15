@@ -1,11 +1,20 @@
-nDisks=int(input("Please enter the number of disks: "))
+# Python program to implement Hanoi Tour Algorithm
+#@Author TOKPE Kossi
+#@Date 23 April 2021
+#Student at School of Technology and Engineering
+#Student Id 2020801137
+#Sharda University
 
-def hanoiTour(nDiks, begin, interm, end):  
-    if(nDisks == 1):  
-        print('Move disk 1 from rod {} to rod {}'.format(begin, end))  
+  
+def TowerOfHanoi(n , source, destination, auxiliary):
+    if n==1:
+        print("Move disk 1 from source",source,"to destination",destination)
         return
-    hanoiTour(nDisks - 1, begin, end, interm)  
-    print('Move disk {} from rod {} to rod {}'.format(nDisks, begin, end))  
-    hanoiTour(nDisks - 1, interm, begin, end)  
-   
-hanoiTour(nDisks, 'A', 'B', 'C')
+    TowerOfHanoi(n-1, source, auxiliary, destination)
+    print("Move disk",n,"from source",source,"to destination",destination)
+    TowerOfHanoi(n-1, auxiliary, destination, source)
+          
+# Driver code
+nDisks=int(input("Please enter the number of disks: "))
+TowerOfHanoi(nDisks,'A','B','C') 
+# A, C, B are the name of rods
